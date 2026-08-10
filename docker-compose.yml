@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: phe-lieu-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: phe_lieu
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - phe_lieu_pgdata:/var/lib/postgresql/data
+volumes:
+  phe_lieu_pgdata:
