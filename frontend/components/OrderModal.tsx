@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { adminApi, type Customer, type Material } from "../api/client";
 import { Icon } from "./icons";
 
@@ -31,6 +31,17 @@ export default function OrderModal({ materials, customers, onClose, onSuccess }:
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState(false);
 
+  // Materials may arrive after the form mounts. Fill the default price once
+  // the list is available, without overwriting a price the user edited.
+  useEffect(() => {
+    if (!materials.length) return;
+    setRows((prev) => prev.map((row) => {
+      const selected = materials.find((material) => material.id === row.material_id);
+      if (!selected || row.unit_price > 0) return row;
+      return { ...row, unit_price: Number(selected.price_per_kg || 0) };
+    }));
+  }, [materials]);
+
   const total = useMemo(() => rows.reduce((sum, r) => sum + r.qty_kg * r.unit_price, 0), [rows]);
 
   const updateRow = <K extends keyof OrderRow>(index: number, field: K, value: OrderRow[K]) => {
@@ -40,7 +51,7 @@ export default function OrderModal({ materials, customers, onClose, onSuccess }:
   const handleMaterialChange = (index: number, materialId: number) => {
     const selected = materials.find((m) => m.id === materialId);
     setRows((prev) => prev.map((row, idx) => idx === index
-      ? { ...row, material_id: materialId, unit_price: Number(selected?.price_per_kg ?? 0) }
+      ? { ...row, material_id: materialId, unit_price: Number(selected?.price_per_kg || 0) }
       : row));
   };
 

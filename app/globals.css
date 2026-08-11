@@ -38,10 +38,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
 body {
   background: var(--bg-primary);
@@ -57,6 +59,10 @@ button, input, select, textarea {
   outline: none;
 }
 button { cursor: pointer; }
+
+.brand-logo { display: block; width: auto; height: auto; max-width: 100%; object-fit: contain; }
+.brand-logo--sidebar { width: 176px; }
+.brand-logo--login { width: 220px; }
 
 h1, h2, h3, .brand, .btn { font-family: var(--font-display); }
 
@@ -3211,4 +3217,828 @@ footer.revealed {
 .contact-item:hover .contact-icon {
   transform: scale(1.1);
   box-shadow: 0 8px 20px rgba(90, 138, 181, 0.3);
+}
+
+/* ======================================================================
+   PUBLIC LANDING REDESIGN — GAZU / EDITORIAL MONOCHROME
+   Keep data, routing and Home.tsx intact; only restyle the public shell.
+   ====================================================================== */
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), rgba(245, 242, 236, 0.92) 34%, rgba(233, 229, 220, 0.98) 100%);
+  color: #111111;
+}
+
+main.public-shell {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)),
+    #f2eee7;
+  color: #111111;
+  overflow-x: clip;
+}
+
+main.public-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(0, 0, 0, 0.035), transparent 28%),
+    radial-gradient(circle at 85% 18%, rgba(0, 0, 0, 0.055), transparent 24%);
+  z-index: 0;
+}
+
+main.public-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+main.public-shell .public-nav,
+main.public-shell .hero,
+main.public-shell .ticker,
+main.public-shell .section,
+main.public-shell .calculator,
+main.public-shell .process.section,
+main.public-shell footer {
+  width: min(100%, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main.public-shell .public-nav {
+  height: 84px;
+  padding: 0 clamp(18px, 3vw, 40px);
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(245, 241, 234, 0.9);
+  backdrop-filter: blur(14px);
+  box-shadow: none;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+main.public-shell .brand {
+  gap: 12px;
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+main.public-shell .brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: #111111;
+  color: #f5f1ea;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+}
+
+main.public-shell .brand b {
+  font-weight: 800;
+}
+
+main.public-shell .nav-links {
+  gap: clamp(18px, 2.4vw, 36px);
+  align-items: center;
+}
+
+main.public-shell .nav-links a {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.78);
+}
+
+main.public-shell .nav-links a:hover {
+  color: #111111;
+}
+
+main.public-shell .nav-links a::after {
+  height: 1px;
+  background: #111111;
+  bottom: -10px;
+}
+
+main.public-shell .admin-link,
+main.public-shell .nav-hotline,
+main.public-shell .btn.primary {
+  background: #111111;
+  color: #f7f4ed !important;
+  border: 1px solid #111111;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 13px 22px;
+  box-shadow: none;
+}
+
+main.public-shell .admin-link:hover,
+main.public-shell .nav-hotline:hover,
+main.public-shell .btn.primary:hover {
+  background: #ffffff;
+  color: #111111 !important;
+  border-color: #111111;
+  box-shadow: none;
+}
+
+main.public-shell .btn.secondary {
+  background: transparent;
+  color: #111111;
+  border: 1px solid rgba(17, 17, 17, 0.18);
+}
+
+main.public-shell .btn.secondary:hover {
+  background: #111111;
+  color: #f7f4ed;
+  border-color: #111111;
+}
+
+main.public-shell .hero {
+  min-height: calc(100vh - 84px);
+  padding: clamp(28px, 4vw, 56px) clamp(18px, 3vw, 40px) clamp(30px, 4vw, 56px);
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(360px, 1.1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0)),
+    radial-gradient(circle at center right, rgba(0, 0, 0, 0.06), transparent 38%);
+  color: #111111;
+}
+
+main.public-shell .hero-copy {
+  max-width: 680px;
+}
+
+main.public-shell .hero .eyebrow,
+main.public-shell .section .eyebrow,
+main.public-shell .process.section .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: rgba(17, 17, 17, 0.58);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+main.public-shell .hero .eyebrow .live-dot {
+  width: 7px;
+  height: 7px;
+  background: #111111;
+  box-shadow: 0 0 0 6px rgba(17, 17, 17, 0.08);
+}
+
+main.public-shell .hero h1,
+main.public-shell .section h2,
+main.public-shell .calculator h2,
+main.public-shell .process.section h2 {
+  margin: 0;
+  color: #111111;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+}
+
+main.public-shell .hero h1 {
+  max-width: 9.5ch;
+  font-size: clamp(62px, 8vw, 118px);
+  font-weight: 900;
+  margin-bottom: 22px;
+}
+
+main.public-shell .hero h1 em {
+  display: inline-block;
+  font-style: normal;
+  color: rgba(17, 17, 17, 0.64);
+}
+
+main.public-shell .hero p,
+main.public-shell .section p,
+main.public-shell .calculator p,
+main.public-shell footer p,
+main.public-shell .trust,
+main.public-shell .text-link,
+main.public-shell .calc-total small {
+  color: rgba(17, 17, 17, 0.7);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+main.public-shell .hero p {
+  max-width: 56ch;
+  margin-bottom: 26px;
+  font-size: 16px;
+}
+
+main.public-shell .hero-actions {
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+main.public-shell .btn {
+  border-radius: 999px;
+  padding: 14px 24px;
+}
+
+main.public-shell .trust {
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(17, 17, 17, 0.12);
+  letter-spacing: 0.01em;
+}
+
+main.public-shell .hero-art {
+  position: relative;
+  min-height: clamp(420px, 58vw, 760px);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  isolation: isolate;
+}
+
+main.public-shell .hero-art-bg {
+  position: absolute;
+  inset: 8% 3% 14%;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.35) 18%, transparent 35%),
+    radial-gradient(circle at 60% 72%, rgba(0, 0, 0, 0.4), transparent 34%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(228, 224, 215, 0.8)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.08));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 35px 70px rgba(0, 0, 0, 0.08);
+  filter: grayscale(1) contrast(1.08);
+}
+
+main.public-shell .hero-art::before {
+  content: "GAZU";
+  position: absolute;
+  inset: auto 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(120px, 18vw, 300px);
+  line-height: 0.82;
+  font-weight: 900;
+  letter-spacing: -0.1em;
+  text-align: center;
+  color: rgba(17, 17, 17, 0.95);
+  mix-blend-mode: multiply;
+  z-index: 0;
+  pointer-events: none;
+  transform: translateY(8%);
+}
+
+main.public-shell .hero-art::after {
+  content: "";
+  position: absolute;
+  inset: 14% 18% 10%;
+  background:
+    radial-gradient(circle at 58% 16%, rgba(255, 255, 255, 0.88), transparent 12%),
+    radial-gradient(circle at 50% 30%, rgba(0, 0, 0, 0.92) 0 18%, transparent 19%),
+    radial-gradient(circle at 46% 35%, rgba(0, 0, 0, 0.7) 0 13%, transparent 14%),
+    radial-gradient(circle at 42% 46%, rgba(0, 0, 0, 0.55) 0 16%, transparent 17%),
+    radial-gradient(circle at 64% 44%, rgba(0, 0, 0, 0.32) 0 12%, transparent 13%);
+  filter: blur(0.2px);
+  opacity: 0.82;
+  z-index: 1;
+  pointer-events: none;
+}
+
+main.public-shell .art-card {
+  position: absolute;
+  z-index: 2;
+  width: min(300px, 34vw);
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 22px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+main.public-shell .art-card span {
+  display: block;
+  color: rgba(17, 17, 17, 0.52);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+main.public-shell .art-card strong {
+  display: block;
+  font-size: clamp(16px, 2vw, 20px);
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+}
+
+main.public-shell .art-card b {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 900;
+}
+
+main.public-shell .art-card i {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  color: rgba(17, 17, 17, 0.66);
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+main.public-shell .card-one {
+  top: 12%;
+  left: 4%;
+}
+
+main.public-shell .card-two {
+  right: 4%;
+  bottom: 10%;
+  width: min(340px, 36vw);
+}
+
+main.public-shell .ticker {
+  height: 58px;
+  padding: 0 clamp(18px, 3vw, 40px);
+  background: #111111;
+  color: #f5f1ea;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  justify-content: center;
+  gap: 16px;
+}
+
+main.public-shell .ticker-item {
+  flex: 0 0 auto;
+}
+
+main.public-shell .ticker-item span,
+main.public-shell .ticker i {
+  color: #f5f1ea;
+}
+
+main.public-shell .ticker i {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  margin-left: 0;
+}
+
+main.public-shell .section,
+main.public-shell .calculator,
+main.public-shell .process.section {
+  padding: clamp(52px, 6vw, 92px) clamp(18px, 3vw, 40px);
+}
+
+main.public-shell .section-head,
+main.public-shell .calculator {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: end;
+}
+
+main.public-shell .section-head > div:first-child,
+main.public-shell .calculator > div:first-child {
+  max-width: 680px;
+}
+
+main.public-shell .section h2,
+main.public-shell .calculator h2,
+main.public-shell .process.section h2 {
+  font-size: clamp(38px, 4.8vw, 76px);
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+main.public-shell .section p,
+main.public-shell .calculator p {
+  max-width: 70ch;
+}
+
+main.public-shell .filters {
+  gap: 10px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+main.public-shell .filters button {
+  min-height: 44px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  color: rgba(17, 17, 17, 0.72);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+main.public-shell .filters button.active,
+main.public-shell .filters button:hover {
+  background: #111111;
+  color: #f5f1ea;
+  border-color: #111111;
+}
+
+main.public-shell .price-grid {
+  margin-top: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+main.public-shell .price-card {
+  padding: 22px 22px 20px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 22px;
+  box-shadow: none;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+main.public-shell .price-card:hover {
+  transform: translateY(-3px);
+  background: #ffffff;
+  border-color: rgba(17, 17, 17, 0.16);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.06);
+}
+
+main.public-shell .material-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: #111111;
+  color: #f5f1ea;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+main.public-shell .price-card span {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: rgba(17, 17, 17, 0.52);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+main.public-shell .price-card h3 {
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: #111111;
+}
+
+main.public-shell .price-value {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+}
+
+main.public-shell .price-value b {
+  color: #111111;
+  font-size: clamp(20px, 2.4vw, 26px);
+}
+
+main.public-shell .price-value small,
+main.public-shell .price-value i {
+  color: rgba(17, 17, 17, 0.54);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+main.public-shell .price-value i {
+  color: rgba(17, 17, 17, 0.78);
+}
+
+main.public-shell .price-value i.down {
+  color: #111111;
+  opacity: 0.58;
+}
+
+main.public-shell .calculator {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  gap: clamp(22px, 4vw, 60px);
+  align-items: stretch;
+}
+
+main.public-shell .calculator .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: #111111;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+main.public-shell .calculator .text-link:hover {
+  opacity: 0.72;
+}
+
+main.public-shell .calc-box {
+  grid-template-columns: 1fr;
+  gap: 18px;
+  padding: 28px;
+  background: #111111;
+  color: #f5f1ea;
+  border-color: rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.12);
+}
+
+main.public-shell .calc-field label {
+  color: rgba(245, 241, 234, 0.7);
+  letter-spacing: 0.18em;
+}
+
+main.public-shell .calc-field select,
+main.public-shell .calc-field input {
+  background: rgba(255, 255, 255, 0.06);
+  color: #f5f1ea;
+  border-color: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+}
+
+main.public-shell .calc-field select:focus,
+main.public-shell .calc-field input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+}
+
+main.public-shell .calc-total {
+  padding-top: 18px;
+  margin-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+}
+
+main.public-shell .calc-total span {
+  color: rgba(245, 241, 234, 0.7);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+main.public-shell .calc-total strong {
+  display: block;
+  margin: 12px 0 6px;
+  color: #ffffff;
+  font-size: clamp(40px, 5vw, 56px);
+  letter-spacing: -0.06em;
+}
+
+main.public-shell .calc-total small {
+  color: rgba(245, 241, 234, 0.62);
+  font-size: 12px;
+}
+
+main.public-shell .process-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+main.public-shell .process-card {
+  padding: 28px 24px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 22px;
+  box-shadow: none;
+  text-align: left;
+  align-items: flex-start;
+}
+
+main.public-shell .process-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(17, 17, 17, 0.16);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+}
+
+main.public-shell .process-num {
+  width: auto;
+  height: auto;
+  background: transparent;
+  border: 0;
+  color: rgba(17, 17, 17, 0.42);
+  font-size: 12px;
+  letter-spacing: 0.28em;
+}
+
+main.public-shell .process-card h3 {
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+main.public-shell .process-card p {
+  margin-top: 2px;
+}
+
+main.public-shell footer {
+  padding: 32px clamp(18px, 3vw, 40px) 56px;
+  border-top: 1px solid rgba(17, 17, 17, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+main.public-shell footer .brand {
+  margin-bottom: 16px !important;
+}
+
+main.public-shell footer p {
+  max-width: 52ch;
+}
+
+main.public-shell footer .btn.primary {
+  min-width: 240px;
+  justify-content: center;
+}
+
+@media (max-width: 1180px) {
+  main.public-shell .hero,
+  main.public-shell .calculator,
+  main.public-shell .section-head {
+    grid-template-columns: 1fr;
+  }
+
+  main.public-shell .hero {
+    min-height: auto;
+    padding-top: 34px;
+  }
+
+  main.public-shell .hero-art {
+    min-height: 420px;
+    margin-top: 12px;
+  }
+
+  main.public-shell .card-one {
+    left: 0;
+  }
+
+  main.public-shell .card-two {
+    right: 0;
+  }
+
+  main.public-shell .section-head,
+  main.public-shell .calculator {
+    align-items: start;
+  }
+
+  main.public-shell .filters {
+    justify-content: flex-start;
+  }
+
+  main.public-shell .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  main.public-shell footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 820px) {
+  main.public-shell .public-nav {
+    height: auto;
+    min-height: 78px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  main.public-shell .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  main.public-shell .hero h1 {
+    font-size: clamp(48px, 14vw, 82px);
+  }
+
+  main.public-shell .hero-art::before {
+    font-size: clamp(92px, 24vw, 180px);
+  }
+
+  main.public-shell .hero-art::after {
+    inset: 18% 12% 14%;
+  }
+
+  main.public-shell .art-card {
+    width: min(290px, 78vw);
+  }
+
+  main.public-shell .card-one {
+    top: 6%;
+  }
+
+  main.public-shell .card-two {
+    bottom: 6%;
+  }
+
+  main.public-shell .price-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  main.public-shell .price-value {
+    margin-left: 0;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  main.public-shell .section h2,
+  main.public-shell .calculator h2,
+  main.public-shell .process.section h2 {
+    font-size: clamp(34px, 9vw, 58px);
+  }
+}
+
+@media (max-width: 560px) {
+  main.public-shell .public-nav,
+  main.public-shell .hero,
+  main.public-shell .section,
+  main.public-shell .calculator,
+  main.public-shell .process.section,
+  main.public-shell footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  main.public-shell .hero {
+    gap: 18px;
+  }
+
+  main.public-shell .hero-actions,
+  main.public-shell footer .btn.primary {
+    width: 100%;
+  }
+
+  main.public-shell .hero-actions .btn,
+  main.public-shell footer .btn.primary {
+    width: 100%;
+  }
+
+  main.public-shell .art-card {
+    padding: 16px;
+  }
+
+  main.public-shell .ticker {
+    height: auto;
+    min-height: 52px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  main.public-shell .price-grid {
+    grid-template-columns: 1fr;
+  }
+
+  main.public-shell .calc-box {
+    padding: 20px;
+  }
 }

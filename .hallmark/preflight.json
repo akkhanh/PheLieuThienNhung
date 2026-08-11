@@ -1,0 +1,8 @@
+{
+  "framework": "React 19 + Next/Vinext",
+  "palette": "Scoped public editorial cobalt tokens in frontend/components/home/home.css",
+  "motion": "CSS transitions and keyframes; reduced-motion supported",
+  "spacing": "4/8 rhythm with responsive clamp values",
+  "font": "Existing app font stack preserved",
+  "scannedAt": "2026-08-10"
+}

@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   title: "Phế Liệu Thiên Nhung — Thu mua tận nơi",
   description: "Thu mua phế liệu tận nơi tại TP.HCM, giá cập nhật mỗi ngày.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/thien-nhung-logo-black.svg",
+    shortcut: "/thien-nhung-logo-black.svg",
   },
 };
 
